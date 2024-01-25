@@ -1,0 +1,11 @@
+.weatherContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .weatherContainerInvisibleBlock{
+        width: 350px;
+        margin: 0 15px;
+        height: 0;
+    }
+}

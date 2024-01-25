@@ -1,0 +1,155 @@
+@import "../../styles/colors.module.scss";
+
+.weatherCardContainer {
+    width: 350px;
+    min-height: 257px;
+    background-color: $card-orange;
+    height: 100%;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px;
+    margin: 16px 15px;
+    position: relative;
+
+    .weatherCardContainerInner {
+        width: 100%;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+
+        .weatherCardHeader {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 11px;
+
+            .weatherCardHeaderLeft {
+                display: flex;
+                flex-direction: column;
+                text-align: start;
+
+                .weatherCardHeaderLeftCity {
+                    font: normal normal normal 16px/23px Jost;
+                }
+
+                .weatherCardHeaderLeftDate {
+                    font: normal normal 300 18px/26px Jost;
+                }
+            }
+
+            .weatherCardHeaderRight {
+                display: flex;
+                max-height: 25px;
+
+                .weatherCardHeaderRightIcon {
+                    background-image: url("../../assets/sun.png");
+                    width: 25px;
+                    height: 25px;
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+
+                .weatherCardHeaderRightTitle {
+                    font: normal normal normal 13px/19px Jost;
+                    color: #c5c5c5;
+                    display: flex;
+                    align-items: center;
+                    margin-right: 16px;
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .weatherCardChart {
+            height: 95px;
+        }
+
+        .weatherCardFooter {
+            display: flex;
+            justify-content: space-between;
+
+            .weatherCardFooterLeft {
+                .weatherCardFooterLeftDeegresFirstContainer {
+                    display: flex;
+
+                    .weatherCardFooterLeftDeegresTitle {
+                        font: normal normal normal 44px/64px Jost;
+                        letter-spacing: 0px;
+                    }
+
+                    .weatherCardFooterLeftDeegresSwap {
+                        display: flex;
+                        align-items: center;
+                        min-height: 1px;
+                        height: 30px;
+                        margin-left: 5px;
+
+                        .weatherCardFooterLeftDeegresSwapButton {
+                            font: normal normal normal 22px/32px Jost;
+                            padding: 0;
+                            border: none;
+                            background-color: transparent;
+                            letter-spacing: 0px;
+                        }
+
+                        .weatherCardFooterLeftDeegresSwapPipe {
+                            width: 0px;
+                            height: 23px;
+                            border: 1px solid #707070;
+                            opacity: 1;
+                            margin: 0 10px;
+                        }
+                    }
+                }
+
+                .weatherCardFooterLeftDeegresSecondContainer {
+                    font: normal normal normal 13px/19px Jost;
+                    color: #c5c5c5;
+                    text-align: left;
+                    direction: rtl;
+                }
+            }
+
+            .weatherCardFooterRight {
+                text-align: right;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                direction: rtl;
+
+                .weatherCardFooterRightTitle {
+                    font: normal normal normal 12px/18px Jost;
+
+                    strong {
+                        font: normal normal 600 12px/18px Jost;
+                        letter-spacing: 0px;
+                        color: $card-text-orange;
+                    }
+                }
+            }
+        }
+    }
+    .closeIcon{
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        right: 8px;
+        top: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.buttonDegreesActive{
+    color: #000000;
+    cursor: default;
+}
+
+.buttonDegreesInactive{
+    color: #8D8D8D;
+    cursor: pointer;
+}

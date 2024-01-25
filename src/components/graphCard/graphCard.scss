@@ -1,0 +1,40 @@
+.areaLine {
+    background: transparent linear-gradient(180deg, #ffa25b 0%, #fff4f4 100%) 0%
+        0% no-repeat padding-box;
+    opacity: 0.3;
+    
+}
+
+.labelBottom {
+    font: normal normal normal 8px/12px Jost;
+    letter-spacing: 0px;
+    color: #c5c5c5;
+    opacity: 0.7;
+}
+
+.recharts-cartesian-axis-line {
+    display: none;
+}
+
+.recharts-curve.recharts-area-curve {
+    display: none;
+}
+
+.recharts-cartesian-axis-tick-value {
+    font: normal normal normal 8px/12px Jost;
+    letter-spacing: 0px;
+    fill: #c5c5c5;
+}
+
+.recharts-cartesian-axis-tick-line{
+    display: none;
+}
+
+.recharts-surface{
+    padding-top: 2px;
+    width: 100%;
+}
+
+.recharts-curve .recharts-area-area{
+    width: 300px;
+}

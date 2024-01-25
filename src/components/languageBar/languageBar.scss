@@ -1,0 +1,11 @@
+.languageBar {
+    right: 25px;
+    top: 25px;
+    position: absolute;
+    display: flex;
+
+    .langIcon{
+        margin-right: 6px;
+        margin-top: 12px;
+    }
+}
