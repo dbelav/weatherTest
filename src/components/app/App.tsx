@@ -18,7 +18,7 @@ const App: React.FC = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords
         dispatch(getCurrentLocation({ latitude, longitude }))
-      });
+      })
     }
   }, [])
 

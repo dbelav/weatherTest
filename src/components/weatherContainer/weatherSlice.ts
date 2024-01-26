@@ -1,10 +1,11 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import type { CitiesWeatherData, WeatherData, UnitDeegrees } from "../../types/weatherCities";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import type { CitiesWeatherData, WeatherData, UnitDeegrees } from "../../types/weatherCities"
+
 
 const initialState: CitiesWeatherData = {
     citiesWeather: [],
     unitDegrees: 'celsius'
-};
+}
 
 const weatherItems = createSlice({
     name: "weatherItems",
@@ -20,15 +21,15 @@ const weatherItems = createSlice({
             state.unitDegrees = action.payload
         },
         deleteCitiesWeather: (state, action: PayloadAction<string>) =>{
-            state.citiesWeather = state.citiesWeather.filter(city => city.name !== action.payload);
+            state.citiesWeather = state.citiesWeather.filter(city => city.name !== action.payload)
         }
-    },
-});
+    }
+})
 
-const { actions, reducer } = weatherItems;
+const { actions, reducer } = weatherItems
 
-export default reducer;
+export default reducer
 
 export const { setDataCitiesWeather,
     switchUnitDegrees,
-    deleteCitiesWeather } = actions;
+    deleteCitiesWeather } = actions

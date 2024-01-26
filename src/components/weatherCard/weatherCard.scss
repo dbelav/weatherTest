@@ -50,7 +50,7 @@
 
                 .weatherCardHeaderRightTitle {
                     font: normal normal normal 13px/19px Jost;
-                    color: #c5c5c5;
+                    color: $gray;
                     display: flex;
                     align-items: center;
                     margin-right: 16px;
@@ -94,7 +94,7 @@
                         .weatherCardFooterLeftDeegresSwapPipe {
                             width: 0px;
                             height: 23px;
-                            border: 1px solid #707070;
+                            border: 1px solid $dark-gray;
                             opacity: 1;
                             margin: 0 10px;
                         }
@@ -103,9 +103,8 @@
 
                 .weatherCardFooterLeftDeegresSecondContainer {
                     font: normal normal normal 13px/19px Jost;
-                    color: #c5c5c5;
+                    color: $gray;
                     text-align: left;
-                    direction: rtl;
                 }
             }
 
@@ -114,7 +113,6 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                direction: rtl;
 
                 .weatherCardFooterRightTitle {
                     font: normal normal normal 12px/18px Jost;
@@ -132,8 +130,8 @@
         position: absolute;
         width: 12px;
         height: 12px;
-        right: 8px;
-        top: 8px;
+        right: 6px;
+        top: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -145,7 +143,7 @@
 }
 
 .buttonDegreesActive{
-    color: #000000;
+    color: $black;
     cursor: default;
 }
 

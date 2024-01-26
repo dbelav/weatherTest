@@ -5,9 +5,9 @@ import {
   XAxis,
   ResponsiveContainer,
   Label,
-  ReferenceLine
+  ReferenceLine,
+  YAxis
 } from "recharts"
-import useSwitchUnitDegrees from '../../hooks/useSwitchUnitDegrees';
 import { useAppSelector } from '../../hooks/reduxHooks';
 
 import "./graphCard.scss";
@@ -26,25 +26,28 @@ const GraphCard = ({ graphData }) => {
       } else{
           return number
       }
-    } else{
+    } else {
       return Math.round((number * 9 / 5) + 32)
     }
   }
 
   const chartData = () => {
     const transformedData = graphData.map((data) => ({
-      dt_txt: format(parseISO(data.dt_txt), 'dd.MM'),
-      temperature: switchUnit(data.main.temp),
-    }));
-  
+        dt_txt: format(parseISO(data.dt_txt), 'dd.MM'),
+        temperature: switchUnit(data.main.temp),
+    }))
+    
     if (language === 'he') {
       return transformedData.reverse();
     } else {
       return transformedData;
     }
-  };
+  }
 
-  
+  const temperatures = chartData().map(data => data.temperature);
+  const minTemperature = Math.min(...temperatures);
+  const maxTemperature = Math.max(...temperatures);
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
@@ -64,20 +67,22 @@ const GraphCard = ({ graphData }) => {
             <stop offset="100%" stopColor="#FFF4F4" />
           </linearGradient>
         </defs>
-        <XAxis dataKey="dt_txt" domain={["auto", "auto"]}/>
+        <YAxis domain={[minTemperature-1, maxTemperature+1]} hide />
+        <XAxis dataKey="dt_txt" interval={0}/>
         <Area
           type="monotone"
           dataKey="temperature"
-          stroke="#8884d8"
+          stroke="#8884d8"  
           fill="url(#colorGradient)"
           fillOpacity={0.3}
         />
-        {chartData().map((entry, index) => (
-          <ReferenceLine key={`reference-line-${index}`} x={index} stroke='transparent'>
+
+        {chartData().map((entry, index) => (        
+          <ReferenceLine key={`reference-line-${index}`} x={index}  stroke='transparent' >
             <Label value={entry.temperature} position="top" className="labelBottom"/>
           </ReferenceLine>      
         ))}
-
+        
       </AreaChart>
     </ResponsiveContainer>
   );

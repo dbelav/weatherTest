@@ -13,7 +13,9 @@ i18n
           Pressure: 'Pressure',
           Feels: 'Feels like',
           Add: 'Add',
-          Search: 'Search'
+          Search: 'Search',
+          Speed: ' m/s',
+          PressureUnit: ' Pa'
         },
       },
       ua: {
@@ -23,7 +25,9 @@ i18n
           Pressure: 'Тиск',
           Feels: 'Відчувається як',
           Add: 'Додати',
-          Search: 'Пошук'
+          Search: 'Пошук',
+          Speed: ' м/c',
+          PressureUnit: ' Па'
         },
       },
       he: {
@@ -33,7 +37,9 @@ i18n
           Pressure: 'לַחַץ',
           Feels: 'מרגיש כמו',
           Add: 'לְהוֹסִיף',
-          Search: 'לחפש'
+          Search: 'לחפש',
+          Speed: ' מ/ש',
+          PressureUnit: ' לח'
         },
       },
     },

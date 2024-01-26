@@ -8,6 +8,8 @@ import { StylesConfig } from 'react-select'
 import './languageBar.scss';
 
 
+type SelectOptionType = { label: string, value: string }
+
 const LanguageBar: React.FC = () => {
 
   const dispatch = useAppDispatch()
@@ -20,7 +22,8 @@ const LanguageBar: React.FC = () => {
     { value: 'HE', label: 'HE' },
   ];
 
-  function setLangHandle(e: any){
+
+  function setLangHandle(e: SelectOptionType){
     localStorage.setItem('lang', JSON.stringify(e.value.toLowerCase()))
     dispatch(setLanguage(e.value.toLowerCase()))
   }
@@ -28,10 +31,11 @@ const LanguageBar: React.FC = () => {
   useEffect(() =>{
     const getLangLocalStorage = localStorage.getItem('lang')
     const parseLangData = getLangLocalStorage ? JSON.parse(getLangLocalStorage) : null
+    
     if(parseLangData){
       dispatch(setLanguage(parseLangData))
     }
-  },[])
+  }, [])
 
   return (
     <div className="languageBar">
@@ -40,11 +44,11 @@ const LanguageBar: React.FC = () => {
         options={options}
         styles={customStyles}
         placeholder={language.toUpperCase()}
-        onChange={e => setLangHandle(e)}
+        onChange={(e) => setLangHandle(e as SelectOptionType)}
       />
     </div>
-  );
-};
+  )
+}
 
 const customStyles: StylesConfig = {
     control: (styles) => ({
@@ -87,6 +91,6 @@ const customStyles: StylesConfig = {
     menu: () => ({
         boxShadow: '0px 3px 6px #00000029',
     }),
-  };
+};
 
 export default LanguageBar;

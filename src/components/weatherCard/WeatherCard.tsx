@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { useEffect, useState } from "react";
-import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
-import GraphCard from "../graphCard/GraphCard";
-import { switchUnitDegrees, deleteCitiesWeather } from "../weatherContainer/weatherSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks"
+import { useEffect, useState } from "react"
+import { format } from "date-fns"
+import { enUS } from "date-fns/locale"
+import GraphCard from "../graphCard/GraphCard"
+import { switchUnitDegrees, deleteCitiesWeather } from "../weatherContainer/weatherSlice"
 import useSwitchUnitDegrees from '../../hooks/useSwitchUnitDegrees'
-import CloseIcon from "../../assets/CloseIcon";
-import { useTranslation } from 'react-i18next';
-import type { WeatherData, WeatherGraph, UnitDeegrees } from "../../types/weatherCities";
-import { API_KEY } from "../../store/apiKey";
+import CloseIcon from "../../assets/CloseIcon"
+import { useTranslation } from 'react-i18next'
+import type { WeatherData, WeatherGraph, UnitDeegrees } from "../../types/weatherCities"
+import { API_KEY } from "../../store/apiKey"
 
 import "./weatherCard.scss";
 
@@ -18,6 +18,7 @@ const WeatherCard: React.FC<{ data: WeatherData }> = ({ data }) => {
     const [graph, setGraph] = useState<WeatherGraph[]>([])
 
     const dispatch = useAppDispatch()
+
     const {t} = useTranslation()
     
     const {unitDegrees} = useAppSelector(state => state.weatherCitiesReducer)
@@ -25,19 +26,19 @@ const WeatherCard: React.FC<{ data: WeatherData }> = ({ data }) => {
     const dtDate = new Date(data.dt * 1000)
     const formattedDate = format(dtDate, "EEE, d MMMM, HH:mm", {
         locale: enUS,
-    });
+    })
  
     async function getDataGraph() {
         try {
             if (data.name) {
                 const response = await fetch(
                     `https://api.openweathermap.org/data/2.5/forecast?q=${data.name}&appid=${API_KEY}&units=metric`
-                );
+                )
 
                 if (!response.ok) {
                     throw new Error(
                         `HTTP error! Status: ${response.status}`
-                    );
+                    )
                 }
                 const graphData = await response.json()
 
@@ -51,11 +52,11 @@ const WeatherCard: React.FC<{ data: WeatherData }> = ({ data }) => {
     function deleteCard(){
         dispatch(deleteCitiesWeather(data.name))
 
-        const existingDataString = localStorage.getItem('citiesData');
-        const existingData = existingDataString ? JSON.parse(existingDataString) : [];
-        const updatedData = existingData.filter((item: WeatherData) => item.name !== data.name);
+        const existingDataString = localStorage.getItem('citiesData')
+        const existingData: WeatherData[] | [] = existingDataString ? JSON.parse(existingDataString) : []
+        const updatedData: WeatherData[] | [] = existingData.filter((item: WeatherData) => item.name !== data.name)
         
-        localStorage.setItem('citiesData', JSON.stringify(updatedData));
+        localStorage.setItem('citiesData', JSON.stringify(updatedData))
     }
 
     function swithUnit(unit: UnitDeegrees){
@@ -65,13 +66,14 @@ const WeatherCard: React.FC<{ data: WeatherData }> = ({ data }) => {
 
     useEffect(() => {
         getDataGraph()
+
         const getLangLocalStorage = localStorage.getItem('unit')
-        const parseLangData = getLangLocalStorage ? JSON.parse(getLangLocalStorage) : null
+        const parseLangData: UnitDeegrees | null = getLangLocalStorage ? JSON.parse(getLangLocalStorage) : null
+
         if(parseLangData){
             dispatch(switchUnitDegrees(parseLangData))
         }
-        
-    }, []);
+    }, [])
 
     const setStylesButtonCelsius = 
         unitDegrees === 'celsius' ? 
@@ -139,13 +141,13 @@ const WeatherCard: React.FC<{ data: WeatherData }> = ({ data }) => {
                     </div>
                     <div className="weatherCardFooterRight">
                         <span className="weatherCardFooterRightTitle">
-                        {t('translation:Wind')}: <strong>{data.wind.speed} m/s</strong>
+                        {t('translation:Wind')}: <strong>{data.wind.speed}{t('translation:Speed')}</strong>
                         </span>
                         <span className="weatherCardFooterRightTitle">
                         {t('translation:Humidity')}: <strong>{data.main.humidity}%</strong>
                         </span>
                         <span className="weatherCardFooterRightTitle">
-                        {t('translation:Pressure')}: <strong>{data.main.pressure}Pa</strong>
+                        {t('translation:Pressure')}: <strong>{data.main.pressure}{t('translation:PressureUnit')}</strong>
                         </span>
                     </div>
                 </div>
