@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns'
+import { useState, useEffect } from 'react'
 import {
   AreaChart,
   Area,
@@ -8,12 +9,14 @@ import {
   ReferenceLine,
   YAxis
 } from "recharts"
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { useAppSelector } from '../../hooks/reduxHooks'
 
 import "./graphCard.scss";
 
 
 const GraphCard = ({ graphData }) => {
+
+  const [ dataGraphState, setDataGraphState ] = useState([])
 
   const { unitDegrees } = useAppSelector(state => state.weatherCitiesReducer)
   const { language } = useAppSelector(state => state.appReducer)
@@ -36,24 +39,28 @@ const GraphCard = ({ graphData }) => {
         dt_txt: format(parseISO(data.dt_txt), 'dd.MM'),
         temperature: switchUnit(data.main.temp),
     }))
-    
+
     if (language === 'he') {
-      return transformedData.reverse();
-    } else {
-      return transformedData;
+      transformedData.reverse()
     }
+
+    setDataGraphState(transformedData)
   }
 
-  const temperatures = chartData().map(data => data.temperature);
-  const minTemperature = Math.min(...temperatures);
-  const maxTemperature = Math.max(...temperatures);
+  useEffect(() =>{
+    chartData()
+  }, [unitDegrees, language, graphData])
+
+  const temperatures = dataGraphState.map(data => data.temperature)
+  const minTemperature = Math.min(...temperatures)
+  const maxTemperature = Math.max(...temperatures)
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         width={300}
         height={300}
-        data={chartData()}
+        data={dataGraphState}
         margin={{
           top: 10,
           right: 3,
@@ -77,7 +84,7 @@ const GraphCard = ({ graphData }) => {
           fillOpacity={0.3}
         />
 
-        {chartData().map((entry, index) => (        
+        {dataGraphState.map((entry, index) => (        
           <ReferenceLine key={`reference-line-${index}`} x={index}  stroke='transparent' >
             <Label value={entry.temperature} position="top" className="labelBottom"/>
           </ReferenceLine>      
@@ -85,7 +92,7 @@ const GraphCard = ({ graphData }) => {
         
       </AreaChart>
     </ResponsiveContainer>
-  );
-};
+  )
+}
 
 export default GraphCard;
